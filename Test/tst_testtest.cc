@@ -17,6 +17,7 @@ private Q_SLOTS:
     void testAddToHistory();
     void testGetThirdItemFromHistory();
     void testGetOldestItemFromHistory();
+    void testGetNewestItemFromHistory();
 };
 
 TestHistory::TestHistory()
@@ -62,9 +63,27 @@ void TestHistory::testGetOldestItemFromHistory()
         his.stepBackHistory();
     }
 
-    std::string ans = his.getFromHistory();
-    cout << ans << endl;
-    QCOMPARE(QString(ans.c_str()), QString("row1"));
+    QCOMPARE(QString(his.getFromHistory().c_str()), QString("row1"));
+}
+
+void TestHistory::testGetNewestItemFromHistory()
+{
+    History his;
+
+    his.addToHistory("row1");
+    his.addToHistory("row2");
+    his.addToHistory("row3");
+    his.addToHistory("row4");
+
+    for(int i = 0; i<100000;i++){
+        his.stepBackHistory();
+    }
+
+    for(int i = 0; i<100000;i++){
+        his.stepForwardHistory();
+    }
+
+    QCOMPARE(QString(his.getFromHistory().c_str()), QString("row4"));
 }
 
 QTEST_APPLESS_MAIN(TestHistory)
