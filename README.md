@@ -1,0 +1,3 @@
+# SerMan
+
+serial port playground
