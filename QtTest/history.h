@@ -5,6 +5,7 @@
 #include <string>
 
 typedef std::vector<std::string> HistoryList;
+
 class History
 {
 public:
