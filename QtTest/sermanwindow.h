@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QScrollBar>
+#include <QTextCursor>
 #include "history.h"
 
 namespace Ui {

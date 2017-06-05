@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    ui->logEdit->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
+    ui->logEdit->setVisible(true);
     ui->cmdLineEdit->installEventFilter( this );
 }
 
@@ -52,6 +53,10 @@ bool MainWindow::eventFilter( QObject *dist, QEvent *event )
         if( keyEvent->key() == Qt::Key_Return )
         {
             commandHistory.addToHistory(ui->cmdLineEdit->text().toStdString());
+
+            auto scrollBar = ui->logEdit->verticalScrollBar();
+            scrollBar->setValue(scrollBar->maximumHeight());
+
             ui->cmdLineEdit->clear();
             return true;
         }
