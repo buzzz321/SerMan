@@ -14,9 +14,9 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
-INCLUDEPATH += ../QtTest
+INCLUDEPATH += ../serman
 
 SOURCES += tst_testtest.cc
-SOURCES += ../QtTest/history.cc
+SOURCES += ../serman/history.cc
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

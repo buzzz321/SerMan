@@ -4,7 +4,7 @@ project(serman)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-ADD_SUBDIRECTORY(QtTest)
+ADD_SUBDIRECTORY(serman)
 ADD_SUBDIRECTORY(Test)
 
 #find_package(Qt4 REQUIRED)

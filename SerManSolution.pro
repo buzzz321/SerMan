@@ -1,8 +1,8 @@
 TEMPLATE = subdirs  
 CONFIG+=ordered
 
-SUBDIRS +=  QtTest Test
+SUBDIRS +=  serman Test
 CONFIG += c++11
 
-app.depends = QtTest
-tests.depends = QtTest
+app.depends = serman
+tests.depends = serman
