@@ -1,38 +1,35 @@
 #include "history.h"
-
+#include <iostream>
 History::History():position(0)
 {
-
+    cmdHistory.clear();
 }
 
 void History::addToHistory(std::string line)
 {
-    cmdHistory.push_back(line);
-    position = cmdHistory.size();
+        std::cout << "adding " << std::endl;
+        cmdHistory.push_back(line);
+        position = cmdHistory.size() - 1;
 }
 
 std::string History::getFromHistory(){
-    HistoryList::size_type pos = 0;
-
-    if (position < cmdHistory.size()){
-        pos = position - 1;
-    } else {
-        pos = cmdHistory.size() - 1;
-    }
-
-    return cmdHistory[pos];
+    return cmdHistory[position];
 }
 
 void History::stepBackHistory(){
 
-    if(position > 1){
+    if(0 != position){
         position -= 1;
     }
 }
 
 void History::stepForwardHistory(){
 
-    if(position < cmdHistory.size()){
+    if(position < cmdHistory.size() - 1){
         position += 1;
     }
+}
+
+HistoryList History::dumpHistory(){
+   return cmdHistory;
 }

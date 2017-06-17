@@ -56,9 +56,15 @@ bool MainWindow::eventFilter( QObject *dist, QEvent *event )
 
             auto scrollBar = ui->logEdit->verticalScrollBar();
             scrollBar->setValue(scrollBar->maximumHeight());
+            ui->logEdit->append(ui->cmdLineEdit->text());
 
             ui->cmdLineEdit->clear();
             return true;
+        }
+        if ( (keyEvent->key() == Qt::Key_D)&& (QApplication::keyboardModifiers() & Qt::ControlModifier)){
+            for(auto line: commandHistory.dumpHistory()){
+                std::cout<< line << std::endl;
+            }
         }
 
     }

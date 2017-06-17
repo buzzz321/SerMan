@@ -15,6 +15,7 @@ public:
     std::string getFromHistory();
     void stepBackHistory();
     void stepForwardHistory();
+    HistoryList dumpHistory();
 private:
     HistoryList cmdHistory;
     HistoryList::size_type position;
