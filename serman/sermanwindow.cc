@@ -23,14 +23,15 @@ void MainWindow::on_sendButton_clicked() {
   ui->cmdLineEdit->clear();
 
   cout << ui->cmdLineEdit->text().toStdString() << endl;
+  /*
+    client.write("lista", strlen("lista"));
+    client.waitForReadyRead(2000);
 
-  client.write("lista", strlen("lista"));
-  client.waitForReadyRead(2000);
-
-  auto retval = client.readAll();
-  auto scrollBar = ui->logEdit->verticalScrollBar();
-  scrollBar->setValue(scrollBar->maximumHeight());
-  ui->logEdit->append(retval);
+    auto retval = client.readAll();
+    auto scrollBar = ui->logEdit->verticalScrollBar();
+    scrollBar->setValue(scrollBar->maximumHeight());
+    ui->logEdit->append(retval);
+    */
 }
 
 bool MainWindow::eventFilter(QObject *dist, QEvent *event) {
