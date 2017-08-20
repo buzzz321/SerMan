@@ -72,6 +72,7 @@ def start_server(hostname, port):
                             print(lista)
                             ready_socket.sendall(lista)
                         else:
+                            print(message)
                             ready_socket.sendall(message)
                     else:
                         # Client connection is lost. Handle it.

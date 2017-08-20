@@ -3,31 +3,36 @@
 
 #include <QMainWindow>
 #include <QScrollBar>
-#include <QTcpSocket>
-#include <QTextCursor>
+
+#include "communicator.h"
 #include "history.h"
+#include <QTextCursor>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class SermanWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+  explicit SermanWindow(QWidget *parent = 0);
+  ~SermanWindow();
 
+public slots:
+  void gotRemoteData();
 private slots:
-    void on_sendButton_clicked();
+  void on_sendButton_clicked();
+  void on_actionConnect_triggered();
+  void on_actionDisconnect_triggered();
+
 protected:
-  bool eventFilter( QObject *dist, QEvent *event );
+  bool eventFilter(QObject *dist, QEvent *event);
 
 private:
-    Ui::MainWindow *ui;
-    History commandHistory;
-    QTcpSocket client;
+  Ui::MainWindow *ui;
+  History commandHistory;
+  Communicator *remote;
 };
 
 #endif // MAINWINDOW_H
