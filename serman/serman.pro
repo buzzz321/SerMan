@@ -16,12 +16,14 @@ TEMPLATE = app
 SOURCES += main.cc \
     sermanwindow.cc \
     history.cc \
-    communicator.cc
+    communicator.cc \
+    fileloader.cc
 
 HEADERS  += \
     sermanwindow.h \
     history.h \
-    communicator.h
+    communicator.h \
+    fileloader.h
 
 FORMS    += \
     sermanwindow.ui

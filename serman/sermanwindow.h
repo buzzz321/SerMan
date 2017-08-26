@@ -1,10 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QHostInfo>
 #include <QMainWindow>
 #include <QScrollBar>
 
 #include "communicator.h"
+#include "fileloader.h"
 #include "history.h"
 #include <QTextCursor>
 
@@ -25,6 +27,7 @@ private slots:
   void on_sendButton_clicked();
   void on_actionConnect_triggered();
   void on_actionDisconnect_triggered();
+  void on_newHostname(QHostInfo ipnumber);
 
 protected:
   bool eventFilter(QObject *dist, QEvent *event);
@@ -33,6 +36,7 @@ private:
   Ui::MainWindow *ui;
   History commandHistory;
   Communicator *remote;
+  FileLoader settings;
 };
 
 #endif // MAINWINDOW_H

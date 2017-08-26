@@ -16,6 +16,11 @@ Communicator::Communicator(QObject *parent) : QObject(parent) {
 
 Communicator::~Communicator() {}
 
+void Communicator::connect() {
+  client.connectToHost(address, remotePort,
+                       QIODevice::ReadWrite | QIODevice::Text);
+}
+
 void Communicator::connect(QString hostname, quint16 port) {
   client.connectToHost(QHostAddress(hostname), port,
                        QIODevice::ReadWrite | QIODevice::Text);
@@ -29,6 +34,12 @@ void Communicator::sendCommand(QString cmd) {
 
   // auto retval = client.readAll();
 }
+
+void Communicator::setAddress(QHostAddress address) {
+  this->address = address;
+  std::cout << address.toString().toStdString() << std::endl;
+}
+void Communicator::setPort(quint16 port) { this->remotePort = port; }
 
 void Communicator::displayError(QAbstractSocket::SocketError socketError) {
   switch (socketError) {

@@ -12,6 +12,14 @@ SermanWindow::SermanWindow(QWidget *parent)
   ui->logEdit->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
   ui->logEdit->setVisible(true);
   ui->cmdLineEdit->installEventFilter(this);
+
+  auto filesettings = settings.loadSettings();
+  if (filesettings.hostName != "") {
+    remote->setPort(filesettings.port);
+    cout << "|" << filesettings.hostName.toStdString() << "|" << endl;
+    QHostInfo::lookupHost(filesettings.hostName, this,
+                          SLOT(on_newHostname(QHostInfo)));
+  }
 }
 
 SermanWindow::~SermanWindow() {
@@ -30,6 +38,14 @@ void SermanWindow::on_sendButton_clicked() {
   scrollBar->setValue(scrollBar->maximumHeight());
   ui->logEdit->append(retVal);
   ui->cmdLineEdit->clear();
+}
+
+void SermanWindow::on_newHostname(QHostInfo ipnumber) {
+  auto addresses = ipnumber.addresses();
+  if (addresses.size() > 0) {
+    cout << "on_newHostname:" << addresses[0].toString().toStdString() << endl;
+    remote->setAddress(addresses[0]);
+  }
 }
 
 bool SermanWindow::eventFilter(QObject *dist, QEvent *event) {
@@ -67,9 +83,7 @@ bool SermanWindow::eventFilter(QObject *dist, QEvent *event) {
   return QObject::eventFilter(dist, event);
 }
 
-void SermanWindow::on_actionConnect_triggered() {
-  remote->connect("127.0.0.1", 4000);
-}
+void SermanWindow::on_actionConnect_triggered() { remote->connect(); }
 
 void SermanWindow::on_actionDisconnect_triggered() { remote->disconnect(); }
 
