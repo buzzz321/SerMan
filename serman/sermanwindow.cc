@@ -1,7 +1,10 @@
 #include "sermanwindow.h"
 #include "ui_sermanwindow.h"
+#include <QFileInfo>
 #include <QKeyEvent>
+#include <QStandardPaths>
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -12,6 +15,12 @@ SermanWindow::SermanWindow(QWidget *parent)
   ui->logEdit->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
   ui->logEdit->setVisible(true);
   ui->cmdLineEdit->installEventFilter(this);
+
+  watcher.addPath(
+      QStandardPaths::locate(QStandardPaths::HomeLocation, ".serman"));
+
+  QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, this,
+                   &SermanWindow::on_hotload);
 
   auto filesettings = settings.loadSettings();
   if (filesettings.hostName != "") {
@@ -44,8 +53,31 @@ void SermanWindow::on_newHostname(QHostInfo ipnumber) {
   auto addresses = ipnumber.addresses();
   if (addresses.size() > 0) {
     cout << "on_newHostname:" << addresses[0].toString().toStdString() << endl;
+    cout << "port: " << remote->getPort() << std::endl;
     remote->setAddress(addresses[0]);
   }
+}
+
+void SermanWindow::on_hotload(const QString &path) {
+
+  if (path.contains(".serman")) {
+    auto filesettings = settings.loadSettings();
+    if (filesettings.hostName != "") {
+      remote->setPort(filesettings.port);
+      cout << "|" << filesettings.hostName.toStdString() << "|" << endl;
+      QHostInfo::lookupHost(filesettings.hostName, this,
+                            SLOT(on_newHostname(QHostInfo)));
+    }
+  } else {
+    std::cout << path.toStdString() << std::endl;
+  }
+
+  // apperently this code is needed on linux since some editors delete the file
+  // and make a new one instead of change it.
+  QFileInfo checkFile(path);
+  while (!checkFile.exists())
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  watcher.addPath(path);
 }
 
 bool SermanWindow::eventFilter(QObject *dist, QEvent *event) {

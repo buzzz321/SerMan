@@ -19,6 +19,7 @@ public:
   QString getRemoteData();
   void setAddress(QHostAddress address);
   void setPort(quint16 port);
+  quint16 getPort() { return remotePort; }
 
 signals:
   void remoteData(QString data);

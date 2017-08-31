@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QFileSystemWatcher>
 #include <QHostInfo>
 #include <QMainWindow>
 #include <QScrollBar>
@@ -28,6 +29,7 @@ private slots:
   void on_actionConnect_triggered();
   void on_actionDisconnect_triggered();
   void on_newHostname(QHostInfo ipnumber);
+  void on_hotload(const QString &path);
 
 protected:
   bool eventFilter(QObject *dist, QEvent *event);
@@ -37,6 +39,7 @@ private:
   History commandHistory;
   Communicator *remote;
   FileLoader settings;
+  QFileSystemWatcher watcher;
 };
 
 #endif // MAINWINDOW_H
