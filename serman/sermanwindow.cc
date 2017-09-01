@@ -40,7 +40,7 @@ void SermanWindow::on_sendButton_clicked() {
   commandHistory.addToHistory(ui->cmdLineEdit->text().toStdString());
 
   cout << ui->cmdLineEdit->text().toStdString() << endl;
-  remote->sendCommand(ui->cmdLineEdit->text());
+  remote->sendCommand(ui->cmdLineEdit->text() + "\n");
 
   auto retVal = ui->cmdLineEdit->text();
   auto scrollBar = ui->logEdit->verticalScrollBar();

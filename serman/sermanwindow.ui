@@ -29,6 +29,14 @@
       </item>
       <item row="0" column="0" colspan="2">
        <widget class="QTextEdit" name="logEdit">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans Mono</family>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="verticalScrollBarPolicy">
          <enum>Qt::ScrollBarAlwaysOn</enum>
         </property>
