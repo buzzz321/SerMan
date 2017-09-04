@@ -11,6 +11,7 @@ public:
 
   FileLoader();
   Settings loadSettings();
+  static const QString fileName;
 };
 
 #endif // FILELOADER_H

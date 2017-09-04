@@ -1,5 +1,6 @@
 #include "sermanwindow.h"
 #include "ui_sermanwindow.h"
+#include <QDir>
 #include <QFileInfo>
 #include <QKeyEvent>
 #include <QStandardPaths>
@@ -16,8 +17,9 @@ SermanWindow::SermanWindow(QWidget *parent)
   ui->logEdit->setVisible(true);
   ui->cmdLineEdit->installEventFilter(this);
 
-  watcher.addPath(
-      QStandardPaths::locate(QStandardPaths::HomeLocation, ".serman"));
+  commandHistory = History(QDir::homePath().toStdString());
+  watcher.addPath(QStandardPaths::locate(QStandardPaths::HomeLocation,
+                                         FileLoader::fileName));
 
   QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, this,
                    &SermanWindow::on_hotload);
@@ -60,7 +62,7 @@ void SermanWindow::on_newHostname(QHostInfo ipnumber) {
 
 void SermanWindow::on_hotload(const QString &path) {
 
-  if (path.contains(".serman")) {
+  if (path.contains(FileLoader::fileName)) {
     auto filesettings = settings.loadSettings();
     if (filesettings.hostName != "") {
       remote->setPort(filesettings.port);
@@ -109,6 +111,24 @@ bool SermanWindow::eventFilter(QObject *dist, QEvent *event) {
       for (auto line : commandHistory.dumpHistory()) {
         std::cout << line << std::endl;
       }
+    }
+    if ((keyEvent->key() == Qt::Key_R) &&
+        (QApplication::keyboardModifiers() & Qt::ControlModifier)) {
+      if (!searchMode) {
+        auto found = commandHistory.find(ui->cmdLineEdit->text().toStdString());
+        if (found.size() > 0) {
+          ui->cmdLineEdit->setText(QString(found[0].c_str()));
+        }
+        searchMode = true;
+        std::cout << "searching" << std::endl;
+      } else {
+        auto line = commandHistory.stepForwardSearch();
+        ui->cmdLineEdit->setText(QString(line.c_str()));
+      }
+    }
+    if ((keyEvent->key() == Qt::Key_G) &&
+        (QApplication::keyboardModifiers() & Qt::ControlModifier)) {
+      searchMode = false;
     }
   }
 

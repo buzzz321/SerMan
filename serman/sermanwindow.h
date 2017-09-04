@@ -40,6 +40,7 @@ private:
   Communicator *remote;
   FileLoader settings;
   QFileSystemWatcher watcher;
+  bool searchMode = false;
 };
 
 #endif // MAINWINDOW_H

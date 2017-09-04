@@ -5,11 +5,14 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+
+const QString FileLoader::fileName = ".serman";
+
 FileLoader::FileLoader() {}
 
 FileLoader::Settings FileLoader::loadSettings() {
   QString filename =
-      QStandardPaths::locate(QStandardPaths::HomeLocation, ".serman");
+      QStandardPaths::locate(QStandardPaths::HomeLocation, fileName);
   std::ifstream myfile(filename.toStdString());
   FileLoader::Settings retVal;
   if (myfile.is_open()) {
