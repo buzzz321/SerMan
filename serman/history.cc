@@ -46,6 +46,7 @@ HistoryList History::find(std::string cmd) {
   for (auto &item : cmdHistory) {
     bool found = std::regex_search(item, m, e);
     if (found) {
+      std::cout << item << std::endl;
       retVal.push_back(item);
     }
   }
@@ -90,3 +91,5 @@ void History::saveToDisc() {
     myfile.close();
   }
 }
+
+HistoryList History::removeDuplicates() { return cmdHistory; }

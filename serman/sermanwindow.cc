@@ -18,6 +18,7 @@ SermanWindow::SermanWindow(QWidget *parent)
   ui->cmdLineEdit->installEventFilter(this);
 
   commandHistory = History(QDir::homePath().toStdString());
+  commandHistory.readFromDisc();
   watcher.addPath(QStandardPaths::locate(QStandardPaths::HomeLocation,
                                          FileLoader::fileName));
 
@@ -121,14 +122,18 @@ bool SermanWindow::eventFilter(QObject *dist, QEvent *event) {
         }
         searchMode = true;
         std::cout << "searching" << std::endl;
+        statusBar()->showMessage("Searching");
       } else {
         auto line = commandHistory.stepForwardSearch();
         ui->cmdLineEdit->setText(QString(line.c_str()));
       }
     }
-    if ((keyEvent->key() == Qt::Key_G) &&
-        (QApplication::keyboardModifiers() & Qt::ControlModifier)) {
+    if (((keyEvent->key() == Qt::Key_G) &&
+         (QApplication::keyboardModifiers() & Qt::ControlModifier)) ||
+        (keyEvent->key() == Qt::Key_Escape)) {
       searchMode = false;
+      std::cout << "search mode off" << std::endl;
+      statusBar()->clearMessage();
     }
   }
 
@@ -145,3 +150,5 @@ void SermanWindow::gotRemoteData() {
   scrollBar->setValue(scrollBar->maximumHeight());
   ui->logEdit->append(retVal);
 }
+
+void SermanWindow::on_actionCleanup_triggered() {}

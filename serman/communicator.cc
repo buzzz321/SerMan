@@ -67,7 +67,14 @@ void Communicator::displayError(QAbstractSocket::SocketError socketError) {
 }
 
 QString Communicator::getRemoteData() {
-  auto consoleText = client.readAll();
+
+  QStringList list;
+  while (client.canReadLine()) {
+    QString data = QString(client.readLine());
+    list.append(data);
+  }
+
+  auto consoleText = list.join(""); // client.readAll();
   std::cout << consoleText.toStdString();
   return consoleText;
 }

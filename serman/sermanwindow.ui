@@ -67,6 +67,7 @@
     </property>
     <addaction name="actionConnect"/>
     <addaction name="actionDisconnect"/>
+    <addaction name="actionCleanup"/>
    </widget>
    <addaction name="menu_File"/>
   </widget>
@@ -94,6 +95,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionCleanup">
+   <property name="text">
+    <string>C&amp;leanup</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
    </property>
   </action>
  </widget>

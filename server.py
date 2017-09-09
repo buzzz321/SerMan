@@ -71,6 +71,13 @@ def start_server(hostname, port):
                             lista = subprocess.check_output(["ls", "-l"])
                             print(lista)
                             ready_socket.sendall(lista)
+                        if b'long' in message:
+                            print(message)
+                            infile = open('serman/sermanwindow.cc')
+                            lista = infile.readlines()
+                            lista = ', '.join([str(x) for x in lista])
+                            print(lista)
+                            ready_socket.sendall(str.encode(lista))
                         else:
                             print(message)
                             ready_socket.sendall(message)

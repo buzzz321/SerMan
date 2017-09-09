@@ -31,6 +31,8 @@ private slots:
   void on_newHostname(QHostInfo ipnumber);
   void on_hotload(const QString &path);
 
+  void on_actionCleanup_triggered();
+
 protected:
   bool eventFilter(QObject *dist, QEvent *event);
 

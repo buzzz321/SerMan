@@ -22,6 +22,8 @@ public:
   void readFromDisc();
   void saveToDisc();
 
+  HistoryList removeDuplicates();
+
 private:
   HistoryList cmdHistory;
   HistoryList::size_type position;
