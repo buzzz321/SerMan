@@ -2,14 +2,16 @@
 #include <fstream>
 #include <iostream>
 #include <regex>
+#include<limits>
+
 
 History::History()
-    : position(0), currentSearchIndex(0), fileName(".serman_history") {
+    : position(std::numeric_limits<std::size_t>::max()), currentSearchIndex(0), fileName(".serman_history") {
   cmdHistory.clear();
 }
 
 History::History(std::string path)
-    : position(0), currentSearchIndex(0), fileName(path + "/.serman_history") {
+    : position(std::numeric_limits<std::size_t>::max()), currentSearchIndex(0), fileName(path + "/.serman_history") {
   cmdHistory.clear();
 }
 
@@ -19,11 +21,18 @@ void History::addToHistory(std::string line) {
   position = cmdHistory.size() - 1;
 }
 
-std::string History::getFromHistory() { return cmdHistory[position]; }
+std::string History::getFromHistory() {
+    if ( position < std::numeric_limits<std::size_t>::max() ) {
+        return cmdHistory[position];
+    }
+    else {
+        return "";
+    }
+}
 
 void History::stepBackHistory() {
 
-  if (0 != position) {
+  if (0 != position && position < std::numeric_limits<std::size_t>::max()) {
     position -= 1;
   }
 }

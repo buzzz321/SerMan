@@ -18,6 +18,7 @@ private Q_SLOTS:
   void testGetOldestItemFromHistory();
   void testGetNewestItemFromHistory();
   void testFindCommandInHistory();
+  void testGetFromHistoryEmptyHistory();
 };
 
 TestHistory::TestHistory() {}
@@ -31,6 +32,13 @@ void TestHistory::testAddToHistory() {
   his.addToHistory("row4");
 
   QCOMPARE(QString(his.getFromHistory().c_str()), QString("row4"));
+}
+
+void TestHistory::testGetFromHistoryEmptyHistory() {
+  History his;
+
+  QCOMPARE(QString(his.getFromHistory().c_str()), QString(""));
+  his.stepBackHistory();
 }
 
 void TestHistory::testGetThirdItemFromHistory() {
