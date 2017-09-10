@@ -152,3 +152,5 @@ void SermanWindow::gotRemoteData() {
 }
 
 void SermanWindow::on_actionCleanup_triggered() {}
+
+void SermanWindow::on_actionClear_Terminal_triggered() { ui->logEdit->clear(); }
