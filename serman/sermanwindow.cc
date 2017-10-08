@@ -2,6 +2,7 @@
 #include "ui_sermanwindow.h"
 #include <QDir>
 #include <QFileInfo>
+#include <QInputDialog>
 #include <QKeyEvent>
 #include <QStandardPaths>
 #include <iostream>
@@ -126,6 +127,14 @@ bool SermanWindow::eventFilter(QObject *dist, QEvent *event) {
       } else {
         auto line = commandHistory.stepForwardSearch();
         ui->cmdLineEdit->setText(QString(line.c_str()));
+      }
+    }
+    if ((keyEvent->key() == Qt::Key_F) &&
+        (QApplication::keyboardModifiers() & Qt::ControlModifier)) {
+      bool ok;
+      QString text = QInputDialog::getText(this, tr("Find"), tr("search text"),
+                                           QLineEdit::Normal, "", &ok);
+      if (ok && !text.isEmpty()) {
       }
     }
     if (((keyEvent->key() == Qt::Key_G) &&
