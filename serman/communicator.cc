@@ -84,5 +84,6 @@ QString Communicator::getRemoteData() {
   }
 
   auto consoleText = list.join(""); // client.readAll();
+  std::cout << consoleText.toStdString();
   return consoleText;
 }
