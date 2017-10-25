@@ -9,6 +9,7 @@
 #include "communicator.h"
 #include "fileloader.h"
 #include "history.h"
+#include "searchdialog.h"
 #include <QTextCursor>
 
 namespace Ui {
@@ -40,6 +41,7 @@ protected:
 
 private:
   Ui::MainWindow *ui;
+  SearchDialog *search;
   History commandHistory;
   Communicator *remote;
   FileLoader settings;

@@ -1,4 +1,5 @@
 #include "sermanwindow.h"
+#include "searchdialog.h"
 #include "ui_sermanwindow.h"
 #include <QDir>
 #include <QFileInfo>
@@ -11,7 +12,7 @@
 using namespace std;
 
 SermanWindow::SermanWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow),
+    : QMainWindow(parent), ui(new Ui::MainWindow), search(nullptr),
       remote(new Communicator(this)) {
   ui->setupUi(this);
   ui->logEdit->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
@@ -37,6 +38,7 @@ SermanWindow::SermanWindow(QWidget *parent)
 
 SermanWindow::~SermanWindow() {
   delete remote;
+  delete search;
   delete ui;
 }
 
@@ -131,11 +133,15 @@ bool SermanWindow::eventFilter(QObject *dist, QEvent *event) {
     }
     if ((keyEvent->key() == Qt::Key_F) &&
         (QApplication::keyboardModifiers() & Qt::ControlModifier)) {
-      bool ok;
-      QString text = QInputDialog::getText(this, tr("Find"), tr("search text"),
-                                           QLineEdit::Normal, "", &ok);
-      if (ok && !text.isEmpty()) {
+
+      std::cout << "finding" << std::endl;
+
+      if (nullptr == search) {
+        search = new SearchDialog(this);
       }
+
+      search->setVisible(true);
+      search->show();
     }
     if (((keyEvent->key() == Qt::Key_G) &&
          (QApplication::keyboardModifiers() & Qt::ControlModifier)) ||
