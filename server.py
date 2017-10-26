@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# found some where on internet and added my own stuff to it.
 
 import logging
 import socket
