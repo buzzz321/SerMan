@@ -169,3 +169,9 @@ void SermanWindow::gotRemoteData() {
 void SermanWindow::on_actionCleanup_triggered() {}
 
 void SermanWindow::on_actionClear_Terminal_triggered() { ui->logEdit->clear(); }
+
+void SermanWindow::searchClicked() { std::cout << "clicked" << std::endl; }
+void SermanWindow::searchDestoyed() {
+  std::cout << "exit" << std::endl;
+  search->close();
+}

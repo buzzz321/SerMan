@@ -25,15 +25,15 @@ public:
 
 public slots:
   void gotRemoteData();
+  void searchClicked();
+  void searchDestoyed();
 private slots:
   void on_sendButton_clicked();
   void on_actionConnect_triggered();
   void on_actionDisconnect_triggered();
   void on_newHostname(QHostInfo ipnumber);
   void on_hotload(const QString &path);
-
   void on_actionCleanup_triggered();
-
   void on_actionClear_Terminal_triggered();
 
 protected:

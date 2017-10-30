@@ -1,6 +1,7 @@
 #ifndef SEARCHDIALOG_H
 #define SEARCHDIALOG_H
 
+#include <QObject>
 #include <QWidget>
 #include <ui_search-dialog.h>
 
@@ -13,10 +14,12 @@ class SearchDialog : public QDialog {
 public:
   explicit SearchDialog(QWidget *parent = nullptr);
   ~SearchDialog() { delete search; }
-
+  void SearchInLog(QString &buffer, QString searchTerm);
 signals:
 
 public slots:
+
+private slots:
 
 private:
   Ui::SearchDialogWindow *search;
