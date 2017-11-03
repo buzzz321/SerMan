@@ -32,6 +32,7 @@
         <property name="font">
          <font>
           <family>DejaVu Sans Mono</family>
+          <pointsize>9</pointsize>
           <weight>75</weight>
           <italic>true</italic>
           <bold>true</bold>
