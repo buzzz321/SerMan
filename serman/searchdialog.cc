@@ -18,18 +18,14 @@ SearchDialog::SearchDialog(QWidget *parent)
                    &SermanWindow::searchDestoyed);
 }
 
-void SearchDialog::SearchInLog(QString &buffer, QString searchTerm) {
-  int index = 0;
-  while ((index = buffer.indexOf(searchTerm, index)) != -1) {
-    int end = buffer.indexOf("\n", index);
-    int start = buffer.lastIndexOf("\n", index);
-    if (start == -1) {
-      start = 0;
-    }
-    if (end == -1) {
-      end = buffer.length() - 1;
-    }
+QTextCursor SearchDialog::SearchInLog(const QTextDocument *buffer) {
+  auto searchItem = search->lineEdit->text().trimmed();
+  auto found = buffer->find(searchItem, m_lastpos);
 
-    std::cout << buffer.mid(start, end).toStdString() << std::endl;
+  if (found.isNull() && m_lastpos != 0) {
+    m_lastpos = 0;
+  } else if (!found.isNull()) {
+    m_lastpos = found.position();
   }
+  return found;
 }

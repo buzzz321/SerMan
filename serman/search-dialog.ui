@@ -50,6 +50,11 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>search</tabstop>
+  <tabstop>exit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
