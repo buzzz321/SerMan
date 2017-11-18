@@ -36,6 +36,8 @@ private slots:
   void on_actionCleanup_triggered();
   void on_actionClear_Terminal_triggered();
 
+  void on_action_Load_Commands_triggered();
+
 protected:
   bool eventFilter(QObject *dist, QEvent *event);
 

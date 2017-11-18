@@ -73,15 +73,16 @@ QString Communicator::getRemoteData() {
     QString data = QString(client.readLine());
     list.append(data);
   }
-  
-  if (client.bytesAvailable() ){
-      auto rest = client.peek(1024);
-      if (rest.contains(QByteArray("$ ")) || rest.contains(QByteArray("login:")) || rest.contains(QByteArray("Password:"))){
-          list.append(rest);
-      }
+
+  if (client.bytesAvailable()) {
+    auto rest = client.peek(1024);
+    if (rest.contains(QByteArray("$ ")) ||
+        rest.contains(QByteArray("login:")) ||
+        rest.contains(QByteArray("Password:"))) {
+      list.append(rest);
+    }
   }
-  
+
   auto consoleText = list.join(""); // client.readAll();
-  std::cout << consoleText.toStdString();
   return consoleText;
 }

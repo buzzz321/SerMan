@@ -1,11 +1,14 @@
 #include "sermanwindow.h"
 #include "searchdialog.h"
 #include "ui_sermanwindow.h"
+#include "util.h"
 #include <QDir>
+#include <QFileDialog>
 #include <QFileInfo>
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QStandardPaths>
+#include <fstream>
 #include <iostream>
 #include <thread>
 
@@ -180,4 +183,25 @@ void SermanWindow::searchClicked() {
 void SermanWindow::searchDestoyed() {
   std::cout << "exit" << std::endl;
   search->close();
+}
+
+void SermanWindow::on_action_Load_Commands_triggered() {
+  auto fileName = QFileDialog::getOpenFileName(
+      this, tr("Open Command file"),
+      QStandardPaths::locate(QStandardPaths::HomeLocation, ""),
+      tr("Command Files (*.cmd *.bat )"));
+  std::cout << "Load some files" << std::endl;
+
+  std::ifstream myfile(fileName.toStdString());
+
+  if (myfile.is_open()) {
+    std::string line;
+
+    while (std::getline(myfile, line)) {
+      QString tmp(line.c_str());
+      tmp.trimmed();
+      remote->sendCommand(tmp + "\n");
+      qSleep(100);
+    }
+  }
 }

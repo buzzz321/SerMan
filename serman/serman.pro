@@ -18,14 +18,16 @@ SOURCES += main.cc \
     history.cc \
     communicator.cc \
     fileloader.cc \
-    searchdialog.cc
+    searchdialog.cc \
+    util.cc
 
 HEADERS  += \
     sermanwindow.h \
     history.h \
     communicator.h \
     fileloader.h \
-    searchdialog.h
+    searchdialog.h \
+    util.h
 
 FORMS    += \
     sermanwindow.ui \
