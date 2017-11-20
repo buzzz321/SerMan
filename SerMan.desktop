@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SerMan Telnet GUI
+GenericName=Terminal
+Comment=A simple terminal helper for telnet connected serialport devices
+Exec=SerMan
+Terminal=false
+MimeType=text/plain;
+Icon=terminal
+Categories=Teminal;Development;
+StartupNotify=true
