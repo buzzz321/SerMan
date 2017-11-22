@@ -6,6 +6,7 @@ class FileLoader {
 public:
   struct Settings {
     QString hostName;
+    QString prepend;
     quint16 port;
   };
 

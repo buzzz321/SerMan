@@ -31,6 +31,10 @@ SermanWindow::SermanWindow(QWidget *parent)
                    &SermanWindow::on_hotload);
 
   auto filesettings = settings.loadSettings();
+
+  if (filesettings.prepend != "") {
+    remote->setPrepend(filesettings.prepend);
+  }
   if (filesettings.hostName != "") {
     remote->setPort(filesettings.port);
     cout << "|" << filesettings.hostName.toStdString() << "|" << endl;
@@ -71,6 +75,7 @@ void SermanWindow::on_hotload(const QString &path) {
 
   if (path.contains(FileLoader::fileName)) {
     auto filesettings = settings.loadSettings();
+    remote->setPrepend(filesettings.prepend);
     if (filesettings.hostName != "") {
       remote->setPort(filesettings.port);
       cout << "|" << filesettings.hostName.toStdString() << "|" << endl;

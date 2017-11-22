@@ -29,7 +29,8 @@ void Communicator::connect(QString hostname, quint16 port) {
 void Communicator::disconnect() { client.disconnectFromHost(); }
 
 void Communicator::sendCommand(QString cmd) {
-  client.write(cmd.toLatin1(), cmd.length());
+  QString buff = (prepend + " " + cmd).trimmed();
+  client.write(buff.toLatin1(), buff.length());
   // client.waitForReadyRead(2000);
 
   // auto retval = client.readAll();
@@ -40,6 +41,8 @@ void Communicator::setAddress(QHostAddress address) {
   std::cout << address.toString().toStdString() << std::endl;
 }
 void Communicator::setPort(quint16 port) { this->remotePort = port; }
+
+void Communicator::setPrepend(const QString &value) { prepend = value; }
 
 void Communicator::displayError(QAbstractSocket::SocketError socketError) {
   switch (socketError) {
