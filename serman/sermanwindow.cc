@@ -81,6 +81,11 @@ void SermanWindow::on_hotload(const QString &path) {
       cout << "|" << filesettings.hostName.toStdString() << "|" << endl;
       QHostInfo::lookupHost(filesettings.hostName, this,
                             SLOT(on_newHostname(QHostInfo)));
+      auto title = this->windowTitle();
+      QString str;
+      str.setNum(filesettings.port);
+      title += " on port:" + str;
+      this->setWindowTitle(title);
     }
   } else {
     std::cout << path.toStdString() << std::endl;
