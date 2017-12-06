@@ -36,6 +36,11 @@ SermanWindow::SermanWindow(QWidget *parent)
     cout << "|" << filesettings.hostName.toStdString() << "|" << endl;
     QHostInfo::lookupHost(filesettings.hostName, this,
                           SLOT(on_newHostname(QHostInfo)));
+    auto title = this->windowTitle();
+    QString str;
+    str.setNum(filesettings.port);
+    title += " on port:" + str;
+    this->setWindowTitle(title);
   }
 }
 
