@@ -34,6 +34,7 @@ private:
   QHostAddress address;
   quint16 remotePort;
   QString prepend;
+  bool dontPrepend = false;
 };
 
 #endif // COMMUNICATOR_H

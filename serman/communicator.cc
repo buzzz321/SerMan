@@ -29,7 +29,14 @@ void Communicator::connect(QString hostname, quint16 port) {
 void Communicator::disconnect() { client.disconnectFromHost(); }
 
 void Communicator::sendCommand(QString cmd) {
-  QString buff = (prepend + " " + cmd).trimmed();
+  QString buff;
+  if (!dontPrepend) {
+    buff = (prepend + " " + cmd).trimmed();
+  } else {
+    buff = cmd.trimmed();
+    dontPrepend = false;
+  }
+
   client.write(buff.toLatin1(), buff.length());
   // client.waitForReadyRead(2000);
 
@@ -83,6 +90,10 @@ QString Communicator::getRemoteData() {
         rest.contains(QByteArray("login:")) ||
         rest.contains(QByteArray("Password:"))) {
       list.append(rest);
+    }
+    if (rest.contains(QByteArray("login:")) ||
+        rest.contains(QByteArray("Password:"))) {
+      dontPrepend = true;
     }
   }
 
