@@ -33,6 +33,8 @@ FileLoader::Settings FileLoader::loadSettings() {
       } else if ("port" == keyValues[0]) {
         bool ok;
         retVal.port = keyValues[1].toUShort(&ok);
+      } else if ("prepend" == keyValues[0]) {
+        retVal.prepend = keyValues[1].trimmed();
       } else {
         std::cout << "Unkown file values found, can't parse "
                   << keyValues[0].toStdString()

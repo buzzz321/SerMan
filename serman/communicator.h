@@ -21,6 +21,8 @@ public:
   void setPort(quint16 port);
   quint16 getPort() { return remotePort; }
 
+  void setPrepend(const QString &value);
+
 signals:
   void remoteData(QString data);
 public slots:
@@ -31,6 +33,8 @@ private:
   QTcpSocket client;
   QHostAddress address;
   quint16 remotePort;
+  QString prepend;
+  bool dontPrepend = false;
 };
 
 #endif // COMMUNICATOR_H
