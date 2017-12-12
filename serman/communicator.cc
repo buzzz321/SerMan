@@ -31,9 +31,9 @@ void Communicator::disconnect() { client.disconnectFromHost(); }
 void Communicator::sendCommand(QString cmd) {
   QString buff;
   if (!dontPrepend) {
-    buff = (prepend + " " + cmd).trimmed();
+    buff = (prepend + " " + cmd);
   } else {
-    buff = cmd.trimmed();
+    buff = cmd;
     dontPrepend = false;
   }
 
@@ -88,11 +88,11 @@ QString Communicator::getRemoteData() {
     auto rest = client.peek(1024);
     if (rest.contains(QByteArray("$ ")) ||
         rest.contains(QByteArray("login:")) ||
-        rest.contains(QByteArray("Password:"))) {
+        rest.toLower().contains(QByteArray("password:"))) {
       list.append(rest);
     }
     if (rest.contains(QByteArray("login:")) ||
-        rest.contains(QByteArray("Password:"))) {
+        rest.toLower().contains(QByteArray("password:"))) {
       dontPrepend = true;
     }
   }
