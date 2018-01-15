@@ -21,6 +21,7 @@ SermanWindow::SermanWindow(QWidget *parent)
   ui->logEdit->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
   ui->logEdit->setVisible(true);
   ui->cmdLineEdit->installEventFilter(this);
+  ui->logEdit->installEventFilter(this);
 
   commandHistory = History(QDir::homePath().toStdString());
   commandHistory.readFromDisc();

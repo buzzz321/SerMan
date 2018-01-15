@@ -8,9 +8,7 @@ SET(MY_SRC
     tst_testtest.cc
     )
 
-ADD_EXECUTABLE(historytests
-    ${MY_SRCS}
-    )
+ADD_EXECUTABLE(historytests "${MY_SRCS}" )
 
-target_link_libraries(serman Qt5::Test)
+target_link_libraries(historytests Qt5::Test)
 
