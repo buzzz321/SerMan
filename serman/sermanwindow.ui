@@ -72,7 +72,14 @@
     <addaction name="actionClear_Terminal"/>
     <addaction name="action_Load_Commands"/>
    </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionShortCuts"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Help"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -119,6 +126,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionShortCuts">
+   <property name="text">
+    <string>ShortCuts</string>
    </property>
   </action>
  </widget>

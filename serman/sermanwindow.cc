@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QInputDialog>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QStandardPaths>
 #include <fstream>
 #include <iostream>
@@ -220,4 +221,17 @@ void SermanWindow::on_action_Load_Commands_triggered() {
       qSleep(100);
     }
   }
+}
+
+void SermanWindow::on_actionShortCuts_triggered() {
+  QMessageBox msgBox;
+  msgBox.setText(R"delim(
+                 Arrow up/down for navigating in commando history.
+                 Return key send the command.
+                 Ctrl-d write all commands to console window.
+                 Ctrl-r search in command history Ctrl-g to stop search .
+                 Ctrl-f search in log view will use regexps c++ 11  style.
+                     )delim");
+  msgBox.setSizeGripEnabled(true);
+  msgBox.exec();
 }

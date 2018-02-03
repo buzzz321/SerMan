@@ -38,6 +38,8 @@ private slots:
 
   void on_action_Load_Commands_triggered();
 
+  void on_actionShortCuts_triggered();
+
 protected:
   bool eventFilter(QObject *dist, QEvent *event);
 
