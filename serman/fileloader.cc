@@ -1,4 +1,5 @@
 #include "fileloader.h"
+#include <QDir>
 #include <QStandardPaths>
 #include <QString>
 #include <QStringList>
@@ -11,8 +12,8 @@ const QString FileLoader::fileName = ".serman";
 FileLoader::FileLoader() {}
 
 FileLoader::Settings FileLoader::loadSettings() {
-  QString filename =
-      QStandardPaths::locate(QStandardPaths::HomeLocation, fileName);
+  QString filename = QDir::homePath() + "/" + fileName;
+
   std::ifstream myfile(filename.toStdString());
   FileLoader::Settings retVal;
   if (myfile.is_open()) {
