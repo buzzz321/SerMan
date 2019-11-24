@@ -28,3 +28,13 @@
 *.app
 *.tlog
 *.stash
+
+# Qt files
+moc_*
+*.moc
+
+serman/build/*
+SerManSolution.pro.user.4.8-pre1
+
+*~
+

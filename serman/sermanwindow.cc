@@ -197,6 +197,7 @@ void SermanWindow::searchClicked() {
   }
   std::cout << "clicked" << std::endl;
 }
+
 void SermanWindow::searchDestoyed() {
   std::cout << "exit" << std::endl;
   search->close();

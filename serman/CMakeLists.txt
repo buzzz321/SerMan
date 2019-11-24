@@ -1,3 +1,7 @@
+project(sermanproject)
+
+cmake_minimum_required(VERSION 3.0)
+
 set(CMAKE_AUTOMOC ON)
 #set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -21,6 +25,6 @@ SET(MY_SRCS
   util.cc
   history.cc)
 
-ADD_EXECUTABLE(serman "${MY_SRCS}")
+ADD_EXECUTABLE(SerMan "${MY_SRCS}")
 
 target_link_libraries(serman Qt5::Widgets Qt5::Core Qt5::Network)
