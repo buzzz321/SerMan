@@ -23,6 +23,7 @@ SermanWindow::SermanWindow(QWidget *parent)
   ui->logEdit->setVisible(true);
   ui->cmdLineEdit->installEventFilter(this);
   ui->logEdit->installEventFilter(this);
+  title = this->windowTitle();
 
   commandHistory = History(QDir::homePath().toStdString());
   commandHistory.readFromDisc();
@@ -45,7 +46,7 @@ SermanWindow::SermanWindow(QWidget *parent)
     auto title = this->windowTitle();
     QString str;
     str.setNum(filesettings.port);
-    title += " on port:" + str;
+    title += " " +filesettings.hostName +" on port:" + str;
     this->setWindowTitle(title);
   }
 }
@@ -88,7 +89,7 @@ void SermanWindow::on_hotload(const QString &path) {
       cout << "|" << filesettings.hostName.toStdString() << "|" << endl;
       QHostInfo::lookupHost(filesettings.hostName, this,
                             SLOT(on_newHostname(QHostInfo)));
-      auto title = this->windowTitle();
+      QString title = title + " " + filesettings.hostName;
       QString str;
       str.setNum(filesettings.port);
       title += " on port:" + str;

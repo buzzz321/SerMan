@@ -51,6 +51,7 @@ private:
   FileLoader settings;
   QFileSystemWatcher watcher;
   bool searchMode = false;
+  QString title;
 };
 
 #endif // MAINWINDOW_H
